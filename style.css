@@ -1,0 +1,209 @@
+:root {
+    /* Цвета для первой сцены (Розовые облака) */
+    --bg-start: #ffe5f1;
+    --text-start: #5a003c;
+    --accent-start: #ff69b4;
+    --border-start: #ffb3c1;
+
+    /* Цвета для второй сцены (Серые тучи и дождь) */
+    --bg-conflict: #2c3e50;
+    --text-conflict: #ecf0f1;
+    --accent-conflict: #e74c3c;
+    --border-conflict: #95a5a6;
+
+    /* Цвета для третьей сцены (Разрешение) */
+    --bg-resolution: #87ceeb;
+    --text-resolution: #34495e;
+    --accent-resolution: #2980b9;
+    --border-resolution: #3498db;
+
+    /* Цвета для секции мнения */
+    --bg-opinion: #f5f5f5;
+    --text-opinion: #2d2d2d;
+}
+
+/* Базовые настройки */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.6;
+    transition: background-color 1s ease, color 1s ease;
+    overflow-x: hidden;
+}
+
+/* Основной контейнер */
+#app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Шапка */
+.header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 4px solid var(--accent-start);
+    background: white;
+}
+
+/* Секции истории */
+.story-section {
+    padding: 40px 20px;
+    text-align: center;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.story-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.story-section p {
+    max-width: 800px;
+    font-size: 1.1rem;
+}
+
+/* Сетка для картинок */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.story-img {
+    width: 100%;
+    height: auto;
+    border: 5px solid var(--border-start);
+    border-radius: 10px;
+    object-fit: cover;
+    transition: border-color 1s ease;
+}
+
+/* Частицы дождя */
+#rain-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.rain-drop {
+    position: absolute;
+    background: #5dade2;
+    width: 2px;
+    height: 10px;
+    border-radius: 1px;
+    animation: fall linear infinite;
+}
+
+/* Секция мнения */
+.opinion-section {
+    padding: 40px 20px;
+    background-color: var(--bg-opinion);
+    color: var(--text-opinion);
+    text-align: left;
+}
+
+.opinion-text {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    border-left: 5px solid #3498db;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.opinion-text p:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+/* Кнопки */
+.controls {
+    padding: 20px;
+    text-align: center;
+    background: white;
+    border-top: 4px solid #3498db;
+}
+
+button {
+    font-family: 'Courier New', Courier, monospace;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    border: 2px solid #3498db;
+    background: transparent;
+    color: #3498db;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #3498db;
+    color: white;
+}
+
+/* Анимации и состояния тем */
+.theme-start {
+    --current-bg: var(--bg-start);
+    --current-text: var(--text-start);
+    --current-accent: var(--accent-start);
+    --current-border: var(--border-start);
+}
+
+.theme-conflict {
+    --current-bg: var(--bg-conflict);
+    --current-text: var(--text-conflict);
+    --current-accent: var(--accent-conflict);
+    --current-border: var(--border-conflict);
+}
+
+.theme-resolution {
+    --current-bg: var(--bg-resolution);
+    --current-text: var(--text-resolution);
+    --current-accent: var(--accent-resolution);
+    --current-border: var(--border-resolution);
+}
+
+/* Применение переменных к элементам */
+body {
+    background-color: var(--current-bg);
+    color: var(--current-text);
+}
+
+.header {
+    border-bottom-color: var(--current-accent);
+}
+
+.story-img {
+    border-color: var(--current-border);
+}
+
+/* Анимация падения капель */
+@keyframes fall {
+    0% {
+        transform: translateY(-20px) rotate(20deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(110vh) rotate(20deg);
+        opacity: 0;
+    }
+}   
