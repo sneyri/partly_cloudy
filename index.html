@@ -3,65 +3,316 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Переменная облачность</title>
+    <title>Переменная облачность — разбор мультфильма</title>
+    <meta name="description" content="Разбор короткометражки Pixar «Переменная облачность» (2009): сюжет, герои и моё мнение о дружбе, которая выдерживает плохую погоду.">
+
+    <!-- Шрифты. Без интернета сайт возьмёт системные — всё продолжит работать -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,400;1,500&family=Inter+Tight:wght@400;500;600;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <!-- Главный контейнер, который будет менять тему -->
-    <div id="app" class="theme-start">
-        
-        <!-- Шапка -->
-        <header class="header">
-            <h1>Переменная облачность</h1>
-        </header>
+<body data-palette="hero">
 
-        <!-- Основной контент -->
-        <main class="main-content">
-            <!-- Секция 1: Начало мультика -->
-            <section id="section-start" class="story-section">
-                <h2>Начало: Розовые облака</h2>
-                <p>В мире, где аисты доставляют детей, всё просто. Облака производят милых зайчиков, котят и щенков. Аисты забирают их с улыбкой, а родители счастливы.</p>
-                <div class="image-grid">
-                    <img src="cloud_with_baby_crocodile.jpg" alt="Облако с детенышем крокодила" class="story-img">
-                </div>
-            </section>
+    <!-- Небо и аура рисуются в этом canvas (script.js) -->
+    <canvas id="sky" aria-hidden="true"></canvas>
+    <div class="sky-fallback" aria-hidden="true"></div>
 
-            <!-- Секция 2: Развязка и конфликт -->
-            <section id="section-conflict" class="story-section">
-                <h2>Конфликт: Серые тучи</h2>
-                <p>Но у одной тучки всё идет не по плану. Вместо пушистых зверят у неё получаются злые крокодилы, ежи и акулы. Аисты боятся к ней летать, получая травмы. Все, кроме одного.</p>
-                <div class="image-grid">
-                    <img src="pained_aist.jpg" alt="Раненый аист" class="story-img">
-                    <img src="cloud_with_baby_crocodile.jpg" alt="Крокодил" class="story-img">
-                </div>
-                <div id="rain-particles"></div>
-            </section>
+    <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+    <header class="topbar">
+        <a class="brand" href="#top" aria-label="В начало">
+            <span class="brand__orb" aria-hidden="true"></span>
+            <span class="brand__name">Переменная облачность</span>
+        </a>
 
-            <!-- Секция 3: Разрешение -->
-            <section id="section-resolution" class="story-section">
-                <h2>Разрешение: Настоящая дружба</h2>
-                <p>Аист уходит к другому, идеальному облаку. Но возвращается. Не за легким счастьем, а чтобы защитить друга. Он просит броню — шлем и панцирь. Это не побег, это готовность принять трудности.</p>
-                <div class="image-grid">
-                    <img src="aist_with_armor.jpg" alt="Аист в броне" class="story-img">
-                    <img src="aist_with_another_cloud.jpg" alt="Аист у другого облака" class="story-img">
-                </div>
-            </section>
+        <p class="readout" aria-live="polite">
+            <span class="readout__num" id="readoutNum">00</span>
+            <span class="readout__total">/ 05</span>
+            <span class="readout__title" id="readoutTitle">Пролог</span>
+        </p>
 
-            <!-- Секция 4: Ваше мнение -->
-            <section id="section-opinion" class="opinion-section">
-                <h2>Мнение</h2>
-                <div class="opinion-text">
-                    <p>В мультике повествуется о мире где всех детенышей приносят аисты. Они в свою очередь берут их у облак, которые "производят" детей. У всех получаются милые зверята, хорошие дети, однако у одной тучки получается все плохо. Она не может произвести милых детей, а только злых агрессивных хищников. Из за этого к ней никто не приходит кроме одного аиста. Этот аист как я понимаю является другом тучки и всегда берет детей у тучки, хоть и всегда получает травмы от них. Однако в один момент он уходит от тучки другому милому облаку. Тучка из за этого начинает плакать, однако через мнгновение аист прилетает вновь только уже с защитой: Шлем, черепаха для тела.</p>
-                    <p>Я считаю данный мультик очень хорошо показывает дружбу в которой один очень сильно хочет дружить, а второй думает только о том чтобы уйти. Аист все время смотрел на другие облака и хотел уйти к ним, а тучка в свою очередь ревновала. Однако аист когда ушел к другому облаку не ушел за хорошими детьми как можно было подумать - он попросил сделать как раз таки защиту. И это очень сильный ход со стороны аиста, ведь можно было просто уйти по простому пути, но он решил пойти по сложному - а именно улучшить дружбу. Данная метафора хорошо олицетворяет реальную жизнь. Иногда кажется то что лучшим вариантом будет найти новую работу, начать новый проект или новую деятельность ТОЛЬКО из за того что начались трудности. Ты начал делать проект, все идет хорошо, но как только начинаются трудности ты его забрасываешь только потому что кажется "есть вариант лучше и проще", хотя нужно не смотря ни на что добить этот самый проект.</p>
-                </div>
-            </section>
-        </main>
+        <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu">
+            <span class="menu-btn__label">Оглавление</span>
+            <span class="menu-btn__icon" aria-hidden="true"><i></i><i></i></span>
+        </button>
+    </header>
 
-        <!-- Кнопка переключения для ручного управления (опционально) -->
-        <div class="controls">
-            <button id="theme-toggle">Сменить сцену</button>
+    <!-- ПОЛНОЭКРАННОЕ ОГЛАВЛЕНИЕ -->
+    <div class="menu" id="menu" hidden>
+        <div class="menu__inner">
+            <p class="eyebrow">Оглавление</p>
+            <ol class="menu__list">
+                <li><a href="#top" data-thumb="images/aist_with_another_cloud.jpg"><span class="menu__num">00</span><span class="menu__title">Пролог</span><span class="menu__desc">Цитата и факты</span></a></li>
+                <li><a href="#ch-world" data-thumb="images/aist_with_another_cloud.jpg"><span class="menu__num">01</span><span class="menu__title">Фабрика облаков</span><span class="menu__desc">Как устроен этот мир</span></a></li>
+                <li><a href="#ch-gus" data-thumb="images/cloud_with_baby_crocodile.jpg"><span class="menu__num">02</span><span class="menu__title">Гас</span><span class="menu__desc">Туча, у которой всё не так</span></a></li>
+                <li><a href="#ch-peck" data-thumb="images/pained_aist.jpg"><span class="menu__num">03</span><span class="menu__title">Пек</span><span class="menu__desc">Аист, который прилетает</span></a></li>
+                <li><a href="#ch-return" data-thumb="images/aist_with_armor.jpg"><span class="menu__num">04</span><span class="menu__title">Возвращение</span><span class="menu__desc">Уход, ливень и броня</span></a></li>
+                <li><a href="#opinion" data-thumb="images/aist_with_armor.jpg"><span class="menu__num">05</span><span class="menu__title">Моё мнение</span><span class="menu__desc">О чём на самом деле этот мультфильм</span></a></li>
+            </ol>
+            <figure class="menu__preview" aria-hidden="true"><img src="images/aist_with_another_cloud.jpg" alt=""></figure>
         </div>
     </div>
+
+    <main>
+        <!-- ═════════════ 00 · ПРОЛОГ ═════════════ -->
+        <div data-seg="0" data-title="Пролог">
+
+            <section class="hero" id="top" data-palette="hero">
+                <p class="hero__meta">
+                    <span>Pixar</span><span>2009</span><span>Короткометражка без слов</span>
+                </p>
+                <h1 class="hero__title">Переменная<br>облачность</h1>
+                <p class="hero__sub">Разбор мультфильма о дружбе, которая выдерживает <em>любую погоду</em></p>
+                <a class="play" href="#quote" aria-label="Начать">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+                </a>
+            </section>
+
+            <section class="quote" id="quote" data-palette="quote">
+                <!-- ╔════════════════════════════════════════════════════════════╗
+                     ║                    ЦИТАТА НА ГЛАВНОЙ                       ║
+                     ║  Чтобы поменять цитату — замени текст между тегами ниже:   ║
+                     ║    • сама фраза  — внутри <p class="quote__text"> … </p>   ║
+                     ║    • подпись     — внутри <cite class="quote__author">…    ║
+                     ║  Кавычки «ёлочки» рисуются сами, их писать не нужно.       ║
+                     ╚════════════════════════════════════════════════════════════╝ -->
+                <figure class="quote__figure">
+                    <blockquote>
+                        <p class="quote__text">Бросить человека — легко. Найти подход и сохранить отношения — путь сложный, но именно он того стоит.</p>
+                    </blockquote>
+                    <figcaption><cite class="quote__author">мысль после просмотра</cite></figcaption>
+                </figure>
+                <!-- ═══════════════════ КОНЕЦ ЦИТАТЫ ═══════════════════ -->
+            </section>
+
+            <section class="facts" data-palette="quote" aria-label="Факты о мультфильме">
+                <dl class="facts__grid">
+                    <div class="reveal"><dt>Год выхода</dt><dd>2009</dd></div>
+                    <div class="reveal"><dt>Студия</dt><dd>Pixar</dd></div>
+                    <div class="reveal"><dt>Режиссёр</dt><dd>Питер Сон</dd></div>
+                    <div class="reveal"><dt>Слов в диалогах</dt><dd>0</dd></div>
+                </dl>
+                <p class="facts__note reveal">В кинотеатрах шёл перед полнометражным «Вверх». Вся история рассказана без единой реплики — только жестами, погодой и музыкой.</p>
+            </section>
+        </div>
+
+        <!-- ═════════════ 01 · МИР ═════════════ -->
+        <section class="chapter" id="ch-world" data-seg="1" data-title="Фабрика облаков" data-palette="world">
+            <div class="chapter__head reveal">
+                <span class="chapter__num" aria-hidden="true">01</span>
+                <div>
+                    <p class="eyebrow">Глава первая · Мир</p>
+                    <h2 class="chapter__title">Фабрика <em>облаков</em></h2>
+                </div>
+            </div>
+
+            <figure class="frame reveal">
+                <div class="frame__img"><img src="images/aist_with_another_cloud.jpg" alt="Огромное розовое облако и маленький аист" loading="lazy"></div>
+                <figcaption><span class="frame__tc">Кадр 01</span>Соседнее облако — мягкое, пушистое и безопасное</figcaption>
+            </figure>
+
+            <div class="chapter__body">
+                <p class="lead reveal">Детёнышей здесь не находят в капусте. Их <em>лепят облака</em>, а аисты разносят по домам. Котята, щенки, зайчата — и всегда счастливые родители.</p>
+
+                <div class="flow reveal" aria-label="Схема: облако, аист, семья">
+                    <div class="flow__node">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18h10a4 4 0 0 0 .6-7.95A6 6 0 0 0 6.2 9.6 4.2 4.2 0 0 0 7 18z"/></svg>
+                        <b>Облако</b><span>лепит малыша</span>
+                    </div>
+                    <div class="flow__line" aria-hidden="true"><i></i></div>
+                    <div class="flow__node">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 10.5c3.2-2.4 6.4-2 10 1.8 3.6-3.8 6.8-4.2 10-1.8"/></svg>
+                        <b>Аист</b><span>доставляет</span>
+                    </div>
+                    <div class="flow__line" aria-hidden="true"><i></i></div>
+                    <div class="flow__node">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-6 8 6v8.5a.5.5 0 0 1-.5.5H15v-6H9v6H4.5a.5.5 0 0 1-.5-.5z"/></svg>
+                        <b>Семья</b><span>получает чудо</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═════════════ 02 · ГАС ═════════════ -->
+        <section class="chapter chapter--alt" id="ch-gus" data-seg="2" data-title="Гас" data-palette="gus">
+            <div class="chapter__head reveal">
+                <span class="chapter__num" aria-hidden="true">02</span>
+                <div>
+                    <p class="eyebrow">Глава вторая · Конфликт</p>
+                    <h2 class="chapter__title">Туча по имени <em>Гас</em></h2>
+                </div>
+            </div>
+
+            <figure class="frame reveal">
+                <div class="frame__img"><img src="images/cloud_with_baby_crocodile.jpg" alt="Серая туча Гас с улыбающимся крокодильчиком" loading="lazy"></div>
+                <figcaption><span class="frame__tc">Кадр 02</span>Гас очень гордится своим крокодильчиком</figcaption>
+            </figure>
+
+            <div class="chapter__body">
+                <p class="lead reveal">У одной серой тучи всё идёт не по плану. Она старается не меньше других, но из неё выходят <em>зубы, иглы и плавники</em>.</p>
+
+                <div class="compare reveal">
+                    <div class="compare__col">
+                        <p class="compare__label">Облака-соседи</p>
+                        <ul class="chips"><li>котёнок</li><li>щенок</li><li>зайчонок</li></ul>
+                    </div>
+                    <span class="compare__vs" aria-hidden="true">vs</span>
+                    <div class="compare__col compare__col--danger">
+                        <p class="compare__label">Гас</p>
+                        <ul class="chips"><li>крокодил</li><li>ёж</li><li>акула</li></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═════════════ 03 · ПЕК ═════════════ -->
+        <section class="chapter" id="ch-peck" data-seg="3" data-title="Пек" data-palette="peck">
+            <div class="chapter__head reveal">
+                <span class="chapter__num" aria-hidden="true">03</span>
+                <div>
+                    <p class="eyebrow">Глава третья · Цена</p>
+                    <h2 class="chapter__title">Аист, который <em>прилетает</em></h2>
+                </div>
+            </div>
+
+            <figure class="frame reveal">
+                <div class="frame__img"><img src="images/pained_aist.jpg" alt="Потрёпанный аист Пек рядом с тучей" loading="lazy"></div>
+                <figcaption><span class="frame__tc">Кадр 03</span>Пек после очередной смены</figcaption>
+            </figure>
+
+            <div class="chapter__body">
+                <p class="lead reveal">Другие аисты давно облетают Гаса стороной. Каждая доставка — это укусы, уколы и синяки. <em>Но Пек всё равно прилетает.</em></p>
+
+                <div class="flock reveal" aria-label="Из семи аистов к Гасу прилетает только один">
+                    <div class="flock__row">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 10.5c3.2-2.4 6.4-2 10 1.8 3.6-3.8 6.8-4.2 10-1.8"/></svg>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 10.5c3.2-2.4 6.4-2 10 1.8 3.6-3.8 6.8-4.2 10-1.8"/></svg>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 10.5c3.2-2.4 6.4-2 10 1.8 3.6-3.8 6.8-4.2 10-1.8"/></svg>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 10.5c3.2-2.4 6.4-2 10 1.8 3.6-3.8 6.8-4.2 10-1.8"/></svg>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 10.5c3.2-2.4 6.4-2 10 1.8 3.6-3.8 6.8-4.2 10-1.8"/></svg>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 10.5c3.2-2.4 6.4-2 10 1.8 3.6-3.8 6.8-4.2 10-1.8"/></svg>
+                        <svg class="is-peck" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 10.5c3.2-2.4 6.4-2 10 1.8 3.6-3.8 6.8-4.2 10-1.8"/></svg>
+                    </div>
+                    <div class="flock__legend">
+                        <span>облетают стороной</span>
+                        <span class="flock__peck">Пек</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═════════════ 04 · ВОЗВРАЩЕНИЕ ═════════════ -->
+        <section class="chapter chapter--alt" id="ch-return" data-seg="4" data-title="Возвращение" data-palette="sunset">
+            <div class="chapter__head reveal">
+                <span class="chapter__num" aria-hidden="true">04</span>
+                <div>
+                    <p class="eyebrow">Глава четвёртая · Развязка</p>
+                    <h2 class="chapter__title">Уход и <em>возвращение</em></h2>
+                </div>
+            </div>
+
+            <figure class="frame reveal">
+                <div class="frame__img"><img src="images/aist_with_armor.jpg" alt="Аист в шлеме и наплечниках держит акулёнка" loading="lazy"></div>
+                <figcaption><span class="frame__tc">Кадр 04</span>Шлем, наплечники — и снова в работу</figcaption>
+            </figure>
+
+            <div class="chapter__body">
+                <ol class="steps reveal">
+                    <li><span class="steps__num">01</span><b>Уход</b><p>Пек улетает к соседнему облаку — мягкому и безопасному.</p></li>
+                    <li><span class="steps__num">02</span><b>Ливень</b><p>Гас решает, что его бросили, и плачет грозой.</p></li>
+                    <li><span class="steps__num">03</span><b>Возвращение</b><p>Пек прилетает обратно — уже в шлеме и наплечниках.</p></li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ═════════════ 05 · МНЕНИЕ ═════════════ -->
+        <section class="opinion" id="opinion" data-seg="5" data-title="Моё мнение" data-palette="opinion">
+            <div class="chapter__head reveal">
+                <span class="chapter__num" aria-hidden="true">05</span>
+                <div>
+                    <p class="eyebrow">Моё мнение</p>
+                    <h2 class="chapter__title">Уйти легко, <em>остаться трудно</em></h2>
+                </div>
+            </div>
+
+            <p class="thesis reveal">Дружба в мультфильме — это <em>настоящая жизнь</em>, рассказанная простыми словами.</p>
+
+            <div class="duo">
+                <article class="duo__card reveal">
+                    <p class="duo__role">Лёгкий путь</p>
+                    <h3>Бросить</h3>
+                    <p>Улететь туда, где мягко и безопасно. Не нужно ничего менять и не нужно ни к кому приспосабливаться.</p>
+                </article>
+                <article class="duo__card reveal">
+                    <p class="duo__role">Сложный путь</p>
+                    <h3>Найти подход</h3>
+                    <p>Понять, что у друга просто такой характер, и придумать, как быть рядом. Это труднее, зато отношения остаются.</p>
+                </article>
+            </div>
+
+            <div class="turn reveal">
+                <p class="eyebrow">Главный ход</p>
+                <p class="turn__line">Пек улетел не <s>искать, где проще</s>,<br>а <em>за бронёй</em>.</p>
+                <p class="turn__note">Гас не изменился, и Пек не стал требовать этого. Он нашёл способ дружить с тем, какой Гас есть, и пройденный путь окупился.</p>
+            </div>
+
+            <div class="life reveal">
+                <div class="life__text">
+                    <p class="eyebrow">Как это бывает в жизни</p>
+                    <h3>Кривая любого проекта</h3>
+                    <p>Новая работа, новый проект, новое увлечение — как только начинаются трудности, кажется, что где-то будет проще. Но там будут <em>свои крокодилы</em>. Дело нужно довести до конца.</p>
+                </div>
+
+                <div class="chart">
+                    <div class="chart__scroll">
+                        <svg class="chart__svg" viewBox="0 0 800 330" role="img" aria-label="График: проект, доведённый до конца, растёт после трудностей; брошенные проекты снова и снова упираются в трудности">
+                            <g class="chart__grid">
+                                <line x1="40" y1="290" x2="780" y2="290"/>
+                                <line x1="40" y1="30" x2="40" y2="290"/>
+                                <text x="780" y="316" text-anchor="end">время</text>
+                                <text x="30" y="40" text-anchor="end" transform="rotate(-90 30 40)">результат</text>
+                            </g>
+                            <g class="chart__plot">
+                                <path class="chart__alt" d="M280 228 L320 124 C380 112 430 190 470 238 L510 134 C570 122 620 202 660 246 L700 150 C730 150 750 176 765 192"/>
+                                <path class="chart__main" d="M40 150 C110 118 200 160 280 228 C350 284 520 140 765 56"/>
+                                <circle cx="40" cy="150" r="5"/>
+                                <circle cx="280" cy="228" r="5"/>
+                                <circle class="chart__dot-alt" cx="320" cy="124" r="5"/>
+                                <circle cx="765" cy="56" r="6"/>
+                                <circle class="chart__dot-alt" cx="765" cy="192" r="5"/>
+                                <text x="52" y="136">старт</text>
+                                <text x="268" y="262" text-anchor="end">первые трудности</text>
+                                <text x="330" y="108">«есть вариант проще»</text>
+                                <text x="752" y="42" text-anchor="end" class="chart__strong">доведено до конца</text>
+                                <text x="752" y="220" text-anchor="end">снова с нуля</text>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="chart__legend">
+                        <span class="chart__key chart__key--main">не сдаться</span>
+                        <span class="chart__key chart__key--alt">бросить и начать заново</span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="outro reveal">Трудности — не повод уйти.<br><em>Это повод надеть шлем.</em></p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p class="footer__big" aria-hidden="true">Partly Cloudy</p>
+        <div class="footer__row">
+            <p>«Переменная облачность» · Pixar, 2009 · реж. Питер Сон</p>
+            <p>Учебный проект. Кадры принадлежат Pixar.</p>
+            <a href="#top">Наверх ↑</a>
+        </div>
+    </footer>
+
+    <!-- НИЖНЯЯ ШКАЛА ГЛАВ (как в плеере) -->
+    <nav class="timeline" aria-label="Главы">
+        <ol class="timeline__list" id="timeline"></ol>
+    </nav>
 
     <script src="script.js"></script>
 </body>
